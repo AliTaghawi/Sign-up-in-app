@@ -1,10 +1,27 @@
-import React from 'react';
-import { Typography } from '@mui/material';
+import React from "react";
+import { Link, Typography } from "@mui/material";
 
 const Footer = () => {
   return (
     <footer>
-      <Typography component='p' variant='p' bgcolor="#e2f1ff" color='primary' padding="15px" textAlign='center' fontWeight='500' >SignUp SignIn project | Seyed Ali Taghawi</Typography>
+      <Typography
+        component="p"
+        variant="p"
+        bgcolor="#e2f1ff"
+        color="primary"
+        padding="15px"
+        textAlign="center"
+        fontWeight="500"
+      >
+        SignUp LogIn project |{" "}
+        <Link
+          href="https://github.com/AliTaghawi"
+          target="blank"
+          underline="none"
+        >
+          Seyed Ali Taghawi
+        </Link>
+      </Typography>
     </footer>
   );
 };

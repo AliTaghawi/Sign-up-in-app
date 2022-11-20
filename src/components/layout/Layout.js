@@ -7,7 +7,12 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{minHeight: "calc(100vh - 100px)"}}>{children}</Container>
+      <Container
+        maxWidth="lg"
+        sx={{ minHeight: "calc(100vh - 100px)"}}
+      >
+        {children}
+      </Container>
       <Footer />
     </>
   );
