@@ -5,7 +5,7 @@ import {
   FormHelperText,
   Grid,
   TextField,
-  Typography,
+  Typography, 
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
@@ -56,7 +56,7 @@ const SignUp = () => {
           <Grid container>
             <Grid item xs={12} my={2}>
               <Typography component="h3" variant="h3" color="primary">
-                Sign Up
+                SignUp
               </Typography>
             </Grid>
             <Grid item xs={12} my={2}>

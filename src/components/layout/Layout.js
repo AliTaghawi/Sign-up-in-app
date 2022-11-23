@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       <Navbar />
       <Container
         maxWidth="lg"
-        sx={{ minHeight: "calc(100vh - 100px)"}}
+        sx={{ minHeight: "calc(100vh - 115px)"}}
       >
         {children}
       </Container>
