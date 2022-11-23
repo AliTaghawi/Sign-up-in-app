@@ -5,11 +5,15 @@ import {
   FormHelperText,
   Grid,
   TextField,
-  Typography, 
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+
+// toastify
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
   name: "",
@@ -19,7 +23,14 @@ const initialValues = {
   isAccepted: false,
 };
 
-const onSubmit = (values) => {};
+const onSubmit = (values, { resetForm }) => {
+  toast.success("You signed up In successfully", {
+    position: "top-center",
+    autoClose: 1500,
+  });
+  console.log(values);
+  resetForm();
+};
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Required!"),

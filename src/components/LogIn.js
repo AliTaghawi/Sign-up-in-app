@@ -4,13 +4,22 @@ import * as Yup from "yup";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+// toastify
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const initialValues = {
   name: "",
   password: "",
 };
 
-const onSubmit = (values) => {
+const onSubmit = (values, { resetForm }) => {
+  toast.success("You logged in successfully", {
+    position: "top-center",
+    autoClose: 1500,
+  });
   console.log(values);
+  resetForm();
 };
 
 const validationSchema = Yup.object({
