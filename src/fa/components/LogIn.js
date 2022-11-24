@@ -1,8 +1,14 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+
+//mui
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import rtlPlugin from "stylis-plugin-rtl";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { prefixer } from "stylis";
 
 // toastify
 import { toast } from "react-toastify";
@@ -14,7 +20,7 @@ const initialValues = {
 };
 
 const onSubmit = (values, { resetForm }) => {
-  toast.success("You logged in successfully", {
+  toast.success("شما با موفقیت وارد شدید", {
     position: "top-center",
     autoClose: 1500,
   });
@@ -23,10 +29,10 @@ const onSubmit = (values, { resetForm }) => {
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Required!"),
+  name: Yup.string().required("الزامی!"),
   password: Yup.string()
-    .min(7, "Password needs to be more than 7 characters!")
-    .required("Required!"),
+    .min(7, "رمزعبور باید بیشتر از 7 کارکتر باشد!")
+    .required("الزامی!"),
 });
 
 const LogIn = () => {
@@ -34,6 +40,11 @@ const LogIn = () => {
     initialValues,
     onSubmit,
     validationSchema,
+  });
+
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
   });
 
   return (
@@ -55,43 +66,45 @@ const LogIn = () => {
           <Grid container>
             <Grid item xs={12} my={2}>
               <Typography component="h3" variant="h3" color="primary">
-                LogIn
+                فرم ورود
               </Typography>
             </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="Name:"
-                name="name"
-                fullWidth
-                type="text"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.name &&
-                  formik.touched.name && {
-                    helperText: formik.errors.name,
-                    error: true,
-                  })}
-              />
-            </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="password:"
-                name="password"
-                fullWidth
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.password &&
-                  formik.touched.password && {
-                    helperText: formik.errors.password,
-                    error: true,
-                  })}
-              />
-            </Grid>
+            <CacheProvider value={cacheRtl}>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="نام:"
+                  name="name"
+                  fullWidth
+                  type="text"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.name &&
+                    formik.touched.name && {
+                      helperText: formik.errors.name,
+                      error: true,
+                    })}
+                />
+              </Grid>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="رمزعبور:"
+                  name="password"
+                  fullWidth
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.password &&
+                    formik.touched.password && {
+                      helperText: formik.errors.password,
+                      error: true,
+                    })}
+                />
+              </Grid>
+            </CacheProvider>
             <Grid
               item
               xs={12}
@@ -106,12 +119,17 @@ const LogIn = () => {
                   textDecoration: "none",
                   color: "#1976d2",
                   fontWeight: "500",
+                  fontSize: "18px",
                 }}
               >
-                SIGNUP
+                ثبت نام
               </Link>
-              <Button variant="contained" type="submit">
-                Submit
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ fontSize: "16px" }}
+              >
+                ورود
               </Button>
             </Grid>
           </Grid>

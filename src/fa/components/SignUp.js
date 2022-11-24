@@ -1,4 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+//mui
 import {
   Button,
   Checkbox,
@@ -7,9 +12,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import rtlPlugin from "stylis-plugin-rtl";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { prefixer } from "stylis";
 
 // toastify
 import { toast } from "react-toastify";
@@ -24,7 +30,7 @@ const initialValues = {
 };
 
 const onSubmit = (values, { resetForm }) => {
-  toast.success("You signed up In successfully", {
+  toast.success("شما با موفقیت ثبت نام کردید", {
     position: "top-center",
     autoClose: 1500,
   });
@@ -33,15 +39,16 @@ const onSubmit = (values, { resetForm }) => {
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Required!"),
-  email: Yup.string().email("Invalid Email format!").required("Required!"),
+  name: Yup.string().required("الزامی!"),
+  email: Yup.string().email("ایمیل نامعتبر است!").required("الزامی!"),
   password: Yup.string()
-    .min(7, "Password needs to be more than 7 characters!")
-    .required("Required!"),
+    .min(7, "رمزعبور باید بیشتر از 7 کارکتر باشد!")
+    .required("الزامی!"),
   confirmpassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords dos not match")
-    .required("Required1"),
-  isAccepted: Yup.boolean().isTrue("the terms hasn't Accepted!"),
+    .min(7, "رمزعبور باید بیشتر از 7 کارکتر باشد!")
+    .oneOf([Yup.ref("password"), null], "رمزعبور مطابقت ندارد")
+    .required("الزامی!"),
+  isAccepted: Yup.boolean().isTrue("قوانین و شرایط پذیرفته نشده است!"),
 });
 
 const SignUp = () => {
@@ -49,6 +56,12 @@ const SignUp = () => {
     initialValues,
     onSubmit,
     validationSchema,
+  });
+
+  // Create rtl cache
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
   });
 
   return (
@@ -70,73 +83,75 @@ const SignUp = () => {
           <Grid container>
             <Grid item xs={12} my={2}>
               <Typography component="h3" variant="h3" color="primary">
-                SignUp
+                فرم ثبت نام
               </Typography>
             </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="Name:"
-                name="name"
-                fullWidth
-                type="text"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.name && formik.touched.name
-                  ? { helperText: formik.errors.name, error: true }
-                  : null)}
-              />
-            </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="E-mail:"
-                name="email"
-                fullWidth
-                type="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.email && formik.touched.email
-                  ? { helperText: formik.errors.email, error: true }
-                  : null)}
-              />
-            </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="Password:"
-                name="password"
-                fullWidth
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.password && formik.touched.password
-                  ? { helperText: formik.errors.password, error: true }
-                  : null)}
-              />
-            </Grid>
-            <Grid item xs={12} my={2}>
-              <TextField
-                variant="outlined"
-                label="Confirm password:"
-                name="confirmpassword"
-                fullWidth
-                type="password"
-                value={formik.values.confirmpassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                {...(formik.errors.confirmpassword &&
-                formik.touched.confirmpassword
-                  ? { helperText: formik.errors.confirmpassword, error: true }
-                  : null)}
-              />
-            </Grid>
+            <CacheProvider value={cacheRtl}>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="نام:"
+                  name="name"
+                  fullWidth
+                  type="text"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.name && formik.touched.name
+                    ? { helperText: formik.errors.name, error: true }
+                    : null)}
+                />
+              </Grid>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="ایمیل:"
+                  name="email"
+                  fullWidth
+                  type="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.email && formik.touched.email
+                    ? { helperText: formik.errors.email, error: true }
+                    : null)}
+                />
+              </Grid>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="رمزعبور:"
+                  name="password"
+                  fullWidth
+                  type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.password && formik.touched.password
+                    ? { helperText: formik.errors.password, error: true }
+                    : null)}
+                />
+              </Grid>
+              <Grid item xs={12} my={2}>
+                <TextField
+                  variant="outlined"
+                  label="تکرار رمزعبور:"
+                  name="confirmpassword"
+                  fullWidth
+                  type="password"
+                  value={formik.values.confirmpassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  {...(formik.errors.confirmpassword &&
+                  formik.touched.confirmpassword
+                    ? { helperText: formik.errors.confirmpassword, error: true }
+                    : null)}
+                />
+              </Grid>
+            </CacheProvider>
             <Grid item xs={12} my={2} display="flex" alignItems="center">
               <Typography component="p" variant="p" mr={2}>
-                I accept the terms
+                من تمام قوانین و شرایط را می‌پذیرم
               </Typography>
               <Checkbox
                 name="isAccepted"
@@ -165,12 +180,17 @@ const SignUp = () => {
                   textDecoration: "none",
                   color: "#1976d2",
                   fontWeight: "500",
+                  fontSize: "18px",
                 }}
               >
-                LOGIN
+                ورود
               </Link>
-              <Button variant="contained" type="submit">
-                Submit
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ fontSize: "16px" }}
+              >
+                ارسال
               </Button>
             </Grid>
           </Grid>
