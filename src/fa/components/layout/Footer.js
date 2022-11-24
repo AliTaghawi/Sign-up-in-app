@@ -12,6 +12,7 @@ const Footer = () => {
         padding="15px"
         textAlign="center"
         fontWeight="500"
+        fontFamily= 'YekanBakh, Roboto, Arial'
       >
         SignUp LogIn project |{" "}
         <Link

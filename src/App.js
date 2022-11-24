@@ -6,7 +6,7 @@ import Fa from "./fa/Fa";
 export const langContext = React.createContext();
 
 function App() {
-  const [lang, setLang] = useState("EN");
+  const [lang, setLang] = useState("FA");
 
   if (lang === "EN") {
     document.documentElement.setAttribute("lang", "en");

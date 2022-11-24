@@ -35,7 +35,7 @@ const Navbar = () => {
     <div>
       <AppBar position="sticky">
         <Container maxWidth="lg">
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Toolbar sx={{ display: "flex", justifyContent: "space-between", direction: 'ltr' }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -47,7 +47,11 @@ const Navbar = () => {
               <Typography
                 component="span"
                 variant="h6"
-                sx={{ fontSize: "13px", mr: "2px" }}
+                sx={{
+                  fontSize: "13px",
+                  mr: "2px",
+                  fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+                }}
               >
                 {lang}
               </Typography>
@@ -71,12 +75,14 @@ const Navbar = () => {
               <MenuItem
                 onClick={() => clickHandeler("EN")}
                 {...(lang === "EN" && { disabled: true })}
+                sx={{fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',}}
               >
                 EN
               </MenuItem>
               <MenuItem
                 onClick={() => clickHandeler("FA")}
                 {...(lang === "FA" && { disabled: true })}
+                sx={{fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',}}
               >
                 FA
               </MenuItem>
@@ -89,9 +95,9 @@ const Navbar = () => {
                 <Button
                   variant="text"
                   color="inherit"
-                  sx={{ fontWeight: "bold", fontSize: "15px" }}
+                  sx={{ fontWeight: "bold", fontSize: "18px" }}
                 >
-                  Sign Up
+                  ثبت نام
                 </Button>
               </Link>
               <Link
@@ -101,9 +107,9 @@ const Navbar = () => {
                 <Button
                   variant="text"
                   color="inherit"
-                  sx={{ fontWeight: "bold", fontSize: "15px" }}
+                  sx={{ fontWeight: "bold", fontSize: "18px" }}
                 >
-                  LogIn
+                  ورود
                 </Button>
               </Link>
             </Box>
