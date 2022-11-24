@@ -39,6 +39,7 @@ const validationSchema = Yup.object({
     .min(7, "Password needs to be more than 7 characters!")
     .required("Required!"),
   confirmpassword: Yup.string()
+    .min(7, "Password needs to be more than 7 characters!")
     .oneOf([Yup.ref("password"), null], "Passwords dos not match")
     .required("Required1"),
   isAccepted: Yup.boolean().isTrue("the terms hasn't Accepted!"),
