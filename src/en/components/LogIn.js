@@ -40,7 +40,10 @@ const LogIn = () => {
     <Grid container>
       <Grid
         item
-        xs={5}
+        xs={11}
+        sm={9}
+        md={7}
+        lg={5}
         sx={{
           boxShadow: "0 8px 12px rgba(0,0,0,0.2)",
           borderRadius: 3,

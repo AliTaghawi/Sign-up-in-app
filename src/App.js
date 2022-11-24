@@ -3,23 +3,23 @@ import { ToastContainer } from "react-toastify";
 import En from "./en/En";
 import Fa from "./fa/Fa";
 
-const langContext = React.createContext();
+export const langContext = React.createContext();
 
 function App() {
-  const [lang, setLang] = useState("fa");
+  const [lang, setLang] = useState("EN");
 
-  if (lang === 'en') {
-    document.documentElement.setAttribute('lang' , 'en')
-    document.documentElement.setAttribute('dir' , 'ltr')
-  } else if (lang === 'fa') {
-    document.documentElement.setAttribute('lang' , 'fa')
-    document.documentElement.setAttribute('dir' , 'rtl')
-    document.body.style.fontFamily = `'YekanBakh' , 'Roboto', 'Arial'`
+  if (lang === "EN") {
+    document.documentElement.setAttribute("lang", "en");
+    document.documentElement.setAttribute("dir", "ltr");
+  } else if (lang === "FA") {
+    document.documentElement.setAttribute("lang", "fa");
+    document.documentElement.setAttribute("dir", "rtl");
+    document.body.style.fontFamily = `'YekanBakh' , 'Roboto', 'Arial'`;
   }
 
   return (
     <langContext.Provider value={{ lang, setLang }}>
-      {lang === "en" ? <En /> : lang === "fa" && <Fa />}
+      {lang === "EN" ? <En /> : lang === "FA" && <Fa />}
       <ToastContainer />
     </langContext.Provider>
   );

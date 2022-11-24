@@ -11,7 +11,7 @@ const En = () => {
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/*" element={<Navigate to="/login" />} />
+        <Route path="/*" element={<Navigate to="/signup" />} />
       </Routes>
     </Layout>
   );
